@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920979955849",
+    "project_id": "myclass-26457",
+    "storage_bucket": "myclass-26457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920979955849:android:d92b673336ede4284a6658",
+        "android_client_info": {
+          "package_name": "com.norez.myclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920979955849-ogd9dsgqt8s2g0c7va8qq7aj7bqs3fhl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSFEHsUt2MrcdiPxEYh2bHViYypaDpb_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920979955849-ogd9dsgqt8s2g0c7va8qq7aj7bqs3fhl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
