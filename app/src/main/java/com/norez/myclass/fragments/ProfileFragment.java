@@ -34,45 +34,47 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        nameProfile = v.findViewById(R.id.nameProfile);
-        emailProfile = v.findViewById(R.id.emailProfile);
-        progressBar = v.findViewById(R.id.progressBar);
-        linearLayout = v.findViewById(R.id.linearLayout);
-        progressBar.setVisibility(View.VISIBLE);
-        linearLayout.setVisibility(View.GONE);
-        SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
-                .whereEqualTo("email", preferences.getString("email", ""))
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot document: task.getResult()) {
-                            nameProfile.setText(document.get("name").toString() + " " + document.get("surname").toString());
-                            emailProfile.setText(preferences.getString("email", ""));
-                            progressBar.setVisibility(View.GONE);
-                            linearLayout.setVisibility(View.VISIBLE);
+        if (isAdded()) {
+            nameProfile = v.findViewById(R.id.nameProfile);
+            emailProfile = v.findViewById(R.id.emailProfile);
+            progressBar = v.findViewById(R.id.progressBar);
+            linearLayout = v.findViewById(R.id.linearLayout);
+            progressBar.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
+            SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users")
+                    .whereEqualTo("email", preferences.getString("email", ""))
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                nameProfile.setText(document.get("name").toString() + " " + document.get("surname").toString());
+                                emailProfile.setText(preferences.getString("email", ""));
+                                progressBar.setVisibility(View.GONE);
+                                linearLayout.setVisibility(View.VISIBLE);
+                            }
                         }
-                    }
-                });
-        logoutButton = v.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("remember", "false");
-                editor.putString("login", "");
-                editor.putString("password", "");
-                editor.putString("email", "");
-                editor.putString("id", "");
-                editor.apply();
-                Intent i = new Intent(getContext(), LoginActivity.class);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
+                    });
+            logoutButton = v.findViewById(R.id.logoutButton);
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.putString("login", "");
+                    editor.putString("password", "");
+                    editor.putString("email", "");
+                    editor.putString("id", "");
+                    editor.apply();
+                    Intent i = new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                    getActivity().finish();
+                }
+            });
+        }
 
         return v;
     }

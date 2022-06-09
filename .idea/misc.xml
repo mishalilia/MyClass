@@ -13,15 +13,20 @@
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_groups_24.xml" value="0.18425925925925926" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.15925925925925927" />
+        <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_man_24.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.18055555555555555" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.15925925925925927" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.15925925925925927" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/lesson.xml" value="0.18425925925925926" />
+        <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/received_message.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/drawable/sent_message.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/activity_chat.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/add_group_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/calendar_cell.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/calendar_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/chat_cell.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/chat_layout.xml" value="0.264" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/fragment_conference.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/mikha/AndroidStudioProjects/MyClass/app/src/main/res/layout/fragment_groups.xml" value="0.2" />

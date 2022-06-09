@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.norez.myclass.R;
 import com.norez.myclass.activities.ChatActivity;
 import com.norez.myclass.models.Group;
@@ -56,9 +58,17 @@ public class MemberAdapter extends ArrayAdapter<String> {
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getContext(), ChatActivity.class);
-                        i.putExtra("name", member.getName());
-                        getContext().startActivity(i);
+                        db.collection("users").whereEqualTo("email", member.getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document: task.getResult()) {
+                                    Intent i = new Intent(getContext(), ChatActivity.class);
+                                    i.putExtra("name", member.getName());
+                                    i.putExtra("id", document.getId());
+                                    getContext().startActivity(i);
+                                }
+                            }
+                        });
                     }
                 });
             }

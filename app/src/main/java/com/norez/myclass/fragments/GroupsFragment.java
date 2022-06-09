@@ -43,20 +43,22 @@ public class GroupsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_groups, container, false);
-        addGroupButton = v.findViewById(R.id.addGroupButton);
-        groupsListView = v.findViewById(R.id.groupsListView);
-        emptyGroupsTV = v.findViewById(R.id.emptyGroupsTV);
-        linearLayout = v.findViewById(R.id.linearLayout);
-        progressBar = v.findViewById(R.id.progressBar);
-        linearLayout.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-        addGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), AddGroupActivity.class);
-                startActivity(i);
-            }
-        });
+        if (isAdded()) {
+            addGroupButton = v.findViewById(R.id.addGroupButton);
+            groupsListView = v.findViewById(R.id.groupsListView);
+            emptyGroupsTV = v.findViewById(R.id.emptyGroupsTV);
+            linearLayout = v.findViewById(R.id.linearLayout);
+            progressBar = v.findViewById(R.id.progressBar);
+            linearLayout.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            addGroupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), AddGroupActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
 
         return v;
     }
@@ -95,8 +97,10 @@ public class GroupsFragment extends Fragment {
                                                 emptyGroupsTV.setVisibility(View.VISIBLE);
                                             else
                                                 emptyGroupsTV.setVisibility(View.GONE);
-                                            GroupAdapter groupAdapter = new GroupAdapter(getContext(), groups);
-                                            groupsListView.setAdapter(groupAdapter);
+                                            if (isAdded()) {
+                                                GroupAdapter groupAdapter = new GroupAdapter(getContext(), groups);
+                                                groupsListView.setAdapter(groupAdapter);
+                                            }
                                             linearLayout.setVisibility(View.VISIBLE);
                                             progressBar.setVisibility(View.GONE);
                                         }

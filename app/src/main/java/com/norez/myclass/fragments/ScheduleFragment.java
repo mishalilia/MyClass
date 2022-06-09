@@ -92,70 +92,74 @@ public class ScheduleFragment extends Fragment implements CalendarAdapter.OnItem
         } else {
             nolessonsTV.setVisibility(View.GONE);
         }
-        LessonAdapter lessonAdapter = new LessonAdapter(getContext(), dailyLessons);
-        lessonListView.setAdapter(lessonAdapter);
+        if (isAdded()) {
+            LessonAdapter lessonAdapter = new LessonAdapter(getContext(), dailyLessons);
+            lessonListView.setAdapter(lessonAdapter);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
-        calendarRecyclerView = v.findViewById(R.id.calendarRecyclerView);
-        monthYearText = v.findViewById(R.id.monthYearTV);
-        nolessonsTV = v.findViewById(R.id.nolessonsTV);
-        lessonListView = v.findViewById(R.id.lessonListView);
-        progressBar = v.findViewById(R.id.progressBar);
-        lessonsLayout = v.findViewById(R.id.lessonsLayout);
-        ImageView arrowLeft = v.findViewById(R.id.arrowLeft_s);
-        ImageView arrowRight = v.findViewById(R.id.arrowRight_s);
-        ImageView calendarButton = v.findViewById(R.id.calendarButton);
-        CalendarUtils.selectedDate = LocalDate.now();
-        SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Lesson.lessonsList.clear();
-        progressBar.setVisibility(View.VISIBLE);
-        lessonsLayout.setVisibility(View.GONE);
-        db.collection("groups").whereArrayContains("members", preferences.getString("id", "")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot document1: task.getResult()) {
-                    db.collection("lessons").whereEqualTo("name", document1.get("name").toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for (QueryDocumentSnapshot document2: task.getResult()) {
-                                Lesson lesson = new Lesson(document1.get("name").toString(),
-                                        LocalDate.of(Math.toIntExact((long) document2.get("dateYear")), Math.toIntExact((long) document2.get("dateMonth")), Math.toIntExact((long) document2.get("dateDay"))),
-                                        document2.get("time").toString(), document2.get("homework").toString());
-                                Lesson.lessonsList.add(lesson);
+        if (isAdded()) {
+            calendarRecyclerView = v.findViewById(R.id.calendarRecyclerView);
+            monthYearText = v.findViewById(R.id.monthYearTV);
+            nolessonsTV = v.findViewById(R.id.nolessonsTV);
+            lessonListView = v.findViewById(R.id.lessonListView);
+            progressBar = v.findViewById(R.id.progressBar);
+            lessonsLayout = v.findViewById(R.id.lessonsLayout);
+            ImageView arrowLeft = v.findViewById(R.id.arrowLeft_s);
+            ImageView arrowRight = v.findViewById(R.id.arrowRight_s);
+            ImageView calendarButton = v.findViewById(R.id.calendarButton);
+            CalendarUtils.selectedDate = LocalDate.now();
+            SharedPreferences preferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            Lesson.lessonsList.clear();
+            progressBar.setVisibility(View.VISIBLE);
+            lessonsLayout.setVisibility(View.GONE);
+            db.collection("groups").whereArrayContains("members", preferences.getString("id", "")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot document1 : task.getResult()) {
+                        db.collection("lessons").whereEqualTo("name", document1.get("name").toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot document2 : task.getResult()) {
+                                    Lesson lesson = new Lesson(document1.get("name").toString(),
+                                            LocalDate.of(Math.toIntExact((long) document2.get("dateYear")), Math.toIntExact((long) document2.get("dateMonth")), Math.toIntExact((long) document2.get("dateDay"))),
+                                            document2.get("time").toString(), document2.get("homework").toString());
+                                    Lesson.lessonsList.add(lesson);
+                                }
+                                progressBar.setVisibility(View.GONE);
+                                lessonsLayout.setVisibility(View.VISIBLE);
+                                setWeekView();
                             }
-                            progressBar.setVisibility(View.GONE);
-                            lessonsLayout.setVisibility(View.VISIBLE);
-                            setWeekView();
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
 
-        arrowLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                previousWeekAction(v);
-            }
-        });
-        arrowRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextWeekAction(v);
-            }
-        });
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), CalendarActivity.class);
-                startActivity(i);
-            }
-        });
+            arrowLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    previousWeekAction(v);
+                }
+            });
+            arrowRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nextWeekAction(v);
+                }
+            });
+            calendarButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), CalendarActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
         return v;
     }
 }
